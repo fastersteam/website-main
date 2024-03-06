@@ -1,17 +1,17 @@
-import React from 'react'
+import React from "react";
 
 const BeforeLogin: React.FC = () => {
-  if (process.env.PAYLOAD_PUBLIC_SEED === 'true') {
+  if (process.env.PAYLOAD_PUBLIC_SEED === "true") {
     return (
       <p>
-        {'Log in with the email '}
+        {"Log in with the email "}
         <strong>demo@payloadcms.com</strong>
-        {' and the password '}
+        {" and the password "}
         <strong>demo</strong>.
       </p>
-    )
+    );
   }
-  return null
-}
+  return null;
+};
 
-export default BeforeLogin
+export default BeforeLogin;

@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
 /**
  * The Next.js API routes can conflict with Payload's own routes if they share the same path
@@ -6,5 +6,5 @@ import { NextResponse } from 'next/server'
  * See readme: https://github.com/payloadcms/payload/tree/main/examples/custom-server#conflicting-routes
  *  */
 export async function POST(): Promise<NextResponse> {
-  return NextResponse.json({ success: true })
+  return NextResponse.json({ success: true });
 }

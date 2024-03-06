@@ -1,39 +1,39 @@
-import type { CollectionConfig } from 'payload/types'
+import type { CollectionConfig } from "payload/types";
 
-import formatSlug from '../utilities/formatSlug'
+import formatSlug from "../utilities/formatSlug";
 
 export const Pages: CollectionConfig = {
-  slug: 'pages',
+  slug: "pages",
   admin: {
-    useAsTitle: 'title',
+    useAsTitle: "title",
   },
   access: {
     read: () => true,
   },
   fields: [
     {
-      name: 'title',
-      label: 'Title',
-      type: 'text',
+      name: "title",
+      label: "Title",
+      type: "text",
       required: true,
     },
     {
-      name: 'richText',
-      type: 'richText',
-      label: 'Content',
+      name: "richText",
+      type: "richText",
+      label: "Content",
     },
     {
-      name: 'slug',
-      label: 'Slug',
-      type: 'text',
+      name: "slug",
+      label: "Slug",
+      type: "text",
       admin: {
-        position: 'sidebar',
+        position: "sidebar",
       },
       hooks: {
-        beforeValidate: [formatSlug('title')],
+        beforeValidate: [formatSlug("title")],
       },
     },
   ],
-}
+};
 
-export default Pages
+export default Pages;

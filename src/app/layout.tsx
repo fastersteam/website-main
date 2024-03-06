@@ -1,21 +1,29 @@
-import React from 'react'
-import Link from 'next/link'
+import React from "react";
+import Link from "next/link";
 
-import './app.scss'
+import "./app.scss";
 
-import classes from './layout.module.scss'
+import classes from "./layout.module.scss";
 
 export const metadata = {
-  title: 'Payload Custom Server',
-  description: 'Serve Payload alongside any front-end framework.',
-}
+  title: "Payload Custom Server",
+  description: "Serve Payload alongside any front-end framework.",
+};
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body className={classes.body}>
         <header className={classes.header}>
-          <Link href="https://payloadcms.com" target="_blank" rel="noopener noreferrer">
+          <Link
+            href="https://payloadcms.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <picture>
               <source
                 media="(prefers-color-scheme: dark)"
@@ -32,5 +40,5 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
       </body>
     </html>
-  )
+  );
 }
