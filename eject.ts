@@ -6,7 +6,7 @@ import path from 'path'
 // See `yarn eject` in `package.json` for the exact command
 // See `./README.md#eject` for more information
 
-const files = ['./next.config.js', './next-env.d.ts', './redirects.js']
+const files = ['./next.config.js', './next-env.d.ts']
 const directories = ['./src/app']
 
 const eject = async (): Promise<void> => {

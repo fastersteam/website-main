@@ -5,10 +5,9 @@
     "outDir": "dist",
     "noEmit": false,
     "jsx": "react",
-    "sourceMap": true,
   },
   "include": [
     "src/server.ts",
-    "src/payload/payload.config.ts",
+    "src/payload.config.ts",
   ]
 }
