@@ -10,6 +10,8 @@ export interface Config {
   collections: {
     users: User;
     pages: Page;
+    posts: Post;
+    categories: Category;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -39,6 +41,22 @@ export interface Page {
       }[]
     | null;
   slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+export interface Post {
+  id: string;
+  title: string;
+  categories?: (string | Category)[] | null;
+  authors?: (string | User)[] | null;
+  publishedOn?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+export interface Category {
+  id: string;
+  title?: string | null;
   updatedAt: string;
   createdAt: string;
 }
