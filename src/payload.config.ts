@@ -23,6 +23,7 @@ export default buildConfig({
     components: {
       beforeLogin: [BeforeLogin],
     },
+    user: Users.slug,
   },
   editor: slateEditor({}),
   db: mongooseAdapter({
