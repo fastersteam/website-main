@@ -16,10 +16,11 @@ import Users from "./collections/Users";
 import Pages from "./collections/Pages";
 import Posts from "./collections/Posts";
 import Categories from "./collections/Categories";
+import { Media } from "./collections/Media";
 
 export default buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || "",
-  collections: [Users, Pages, Posts, Categories],
+  collections: [Users, Pages, Posts, Categories, Media],
   admin: {
     bundler: webpackBundler(),
     components: {

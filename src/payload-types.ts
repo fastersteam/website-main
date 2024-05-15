@@ -12,6 +12,7 @@ export interface Config {
     pages: Page;
     posts: Post;
     categories: Category;
+    media: Media;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -32,6 +33,18 @@ export interface User {
   lockUntil?: string | null;
   password: string | null;
 }
+export interface Media {
+  id: string;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+}
 export interface Page {
   id: string;
   title: string;
@@ -50,6 +63,38 @@ export interface Post {
   categories?: (string | Category)[] | null;
   authors?: (string | User)[] | null;
   publishedOn?: string | null;
+  content: (
+    | {
+        text?:
+          | {
+              [k: string]: unknown;
+            }[]
+          | null;
+        media?:
+          | {
+              media: string | Media;
+              size?: ('auto' | 'halfScreen' | 'fullScreen') | null;
+              position?: ('left' | 'right' | 'center') | null;
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'mediaBlock';
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'contentBlock';
+      }
+    | {
+        text?:
+          | {
+              [k: string]: unknown;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'quoteBlock';
+      }
+  )[];
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
