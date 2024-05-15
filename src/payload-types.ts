@@ -22,6 +22,7 @@ export interface User {
   id: string;
   name?: string | null;
   roles?: ('admin' | 'user')[] | null;
+  photo?: string | Media | null;
   updatedAt: string;
   createdAt: string;
   email: string;

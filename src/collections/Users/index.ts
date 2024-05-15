@@ -45,6 +45,12 @@ export const Users: CollectionConfig = {
         update: admins,
       },
     },
+    {
+      name: "photo",
+      label: "Photo",
+      type: "upload",
+      relationTo: "media",
+    }
   ],
   timestamps: true,
 };
