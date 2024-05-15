@@ -8,70 +8,68 @@
 
 export interface Config {
   collections: {
-    pages: Page
-    users: User
-    'payload-preferences': PayloadPreference
-    'payload-migrations': PayloadMigration
-  }
-  globals: {}
-}
-export interface Page {
-  id: string
-  title: string
-  richText?: {
-    [k: string]: unknown
-  }[]
-  slug?: string
-  updatedAt: string
-  createdAt: string
+    users: User;
+    pages: Page;
+    'payload-preferences': PayloadPreference;
+    'payload-migrations': PayloadMigration;
+  };
+  globals: {};
 }
 export interface User {
-  id: string
-  updatedAt: string
-  createdAt: string
-  email: string
-  resetPasswordToken?: string
-  resetPasswordExpiration?: string
-  salt?: string
-  hash?: string
-  loginAttempts?: number
-  lockUntil?: string
-  password?: string
+  id: string;
+  name?: string | null;
+  roles?: ('admin' | 'user')[] | null;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  password: string | null;
+}
+export interface Page {
+  id: string;
+  title: string;
+  richText?:
+    | {
+        [k: string]: unknown;
+      }[]
+    | null;
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 export interface PayloadPreference {
-  id: string
+  id: string;
   user: {
-    relationTo: 'users'
-    value: string | User
-  }
-  key?: string
+    relationTo: 'users';
+    value: string | User;
+  };
+  key?: string | null;
   value?:
     | {
-        [k: string]: unknown
+        [k: string]: unknown;
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null
-  updatedAt: string
-  createdAt: string
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 export interface PayloadMigration {
-  id: string
-  name?: string
-  batch?: number
-  updatedAt: string
-  createdAt: string
+  id: string;
+  name?: string | null;
+  batch?: number | null;
+  updatedAt: string;
+  createdAt: string;
 }
 
+
 declare module 'payload' {
-  export interface GeneratedTypes {
-    collections: {
-      pages: Page
-      users: User
-      'payload-preferences': PayloadPreference
-      'payload-migrations': PayloadMigration
-    }
-  }
+  export interface GeneratedTypes extends Config {}
 }

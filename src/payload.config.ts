@@ -10,12 +10,14 @@ dotenv.config({
 
 import { buildConfig } from "payload/config";
 
+import { Users } from "./collections/Users";
 import { Pages } from "./collections/Pages";
+
 import BeforeLogin from "./components/BeforeLogin";
 
 export default buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || "",
-  collections: [Pages],
+  collections: [Users, Pages],
   admin: {
     bundler: webpackBundler(),
     components: {
