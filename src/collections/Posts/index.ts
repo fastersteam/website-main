@@ -1,13 +1,19 @@
 import type { CollectionConfig } from "payload/types";
 
-import { adminsAndPublished } from "../access/adminsAndPublished";
-import { admins } from "../access/admins";
+import { adminsAndPublished } from "../../access/adminsAndPublished";
+import { admins } from "../../access/admins";
+import { ContentBlock } from "../../blocks/ContentBlock";
+import { QuoteBlock } from "../../blocks/QuoteBlock";
+import { populateAuthors } from "./populateAuthors";
 
 const Posts: CollectionConfig = {
   slug: "posts",
   admin: {
     useAsTitle: "title",
     defaultColumns: ["title", "slug"],
+  },
+  hooks: {
+    afterRead: [populateAuthors],
   },
   versions: {
     drafts: true
@@ -44,6 +50,27 @@ const Posts: CollectionConfig = {
       },
     },
     {
+      name: 'populatedAuthors',
+      type: 'array',
+      admin: {
+        readOnly: true,
+        disabled: true
+      },
+      access: {
+        update: () => false,
+      },
+      fields: [
+        {
+          name: 'id',
+          type: 'text'
+        },
+        {
+          name: 'name',
+          type: 'text'
+        }
+      ]
+    },
+    {
       name: "publishedOn",
       type: "date",
       admin: {
@@ -63,6 +90,12 @@ const Posts: CollectionConfig = {
         ],
       },
     },
+    {
+      name: "content",
+      type: "blocks",
+      required: true,
+      blocks: [ContentBlock, QuoteBlock]
+    }
   ]
 }
 

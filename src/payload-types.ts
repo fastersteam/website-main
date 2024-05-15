@@ -63,6 +63,12 @@ export interface Post {
   title: string;
   categories?: (string | Category)[] | null;
   authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
   publishedOn?: string | null;
   content: (
     | {
