@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 import "./app.scss";
+import "./globals.css";
 
 import classes from "./layout.module.scss";
 
