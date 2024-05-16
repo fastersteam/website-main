@@ -50,7 +50,7 @@ export const Users: CollectionConfig = {
       label: "Photo",
       type: "upload",
       relationTo: "media",
-    }
+    },
   ],
   timestamps: true,
 };

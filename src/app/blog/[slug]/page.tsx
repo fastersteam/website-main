@@ -4,13 +4,13 @@ import { notFound } from "next/navigation";
 import qs from "qs";
 
 import type { Media, Post } from "../../../payload-types";
+import { BlogCard } from "../../_components/BlogCard";
 import { Gutter } from "../../_components/Gutter";
 import { RichText } from "../../_components/RichText";
 import { formatDateTime } from "../../_utilities/formatDateTime";
 import { formatList } from "../../_utilities/formatList";
-import { BlogCard } from "../../_components/BlogCard";
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 export default async function Post({ params: { slug } }) {
   let post: Post | null = null;
@@ -46,7 +46,7 @@ export default async function Post({ params: { slug } }) {
 
   return (
     <Fragment>
-      <main className='bg-slate-900 text-slate-100'>
+      <main className="bg-slate-900 text-slate-100">
         <Gutter>
           <div className="px-12 lg:px-24 xl:px-48 py-6 lg:py-12 xl:py-24 flex flex-col gap-12">
             <header className="flex flex-col gap-6">
@@ -68,8 +68,11 @@ export default async function Post({ params: { slug } }) {
                 const { text, id, style } = block;
                 const media = block.media as Media | undefined;
                 return (
-                  <div key={id} className="w-full flex flex-col lg:flex-row gap-4 lg:gap-8 items-center prose-slate prose-invert lg:prose-lg">
-                    {media &&
+                  <div
+                    key={id}
+                    className="w-full flex flex-col lg:flex-row gap-4 lg:gap-8 items-center prose-slate prose-invert lg:prose-lg"
+                  >
+                    {media && (
                       <Image
                         src={media.url}
                         alt={media.alt}
@@ -77,10 +80,13 @@ export default async function Post({ params: { slug } }) {
                         height={media.height}
                         className="rounded-md"
                       />
-                    }
-                    <RichText content={text} className={style == "quote" ? 'prose-blockquote' : ''} />
+                    )}
+                    <RichText
+                      content={text}
+                      className={style == "quote" ? "prose-blockquote" : ""}
+                    />
                   </div>
-                )
+                );
               })}
             </div>
           </div>

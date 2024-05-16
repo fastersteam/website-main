@@ -1,6 +1,6 @@
 import React from "react";
+import { Montserrat } from "next/font/google";
 import Link from "next/link";
-import { Montserrat } from 'next/font/google'
 
 // import "./app.scss";
 import "./globals.css";
