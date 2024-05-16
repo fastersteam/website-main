@@ -1,12 +1,12 @@
 import type { CollectionConfig } from "payload/types";
 
-import { adminsAndPublished } from "../../access/adminsAndPublished";
 import { admins } from "../../access/admins";
+import { adminsAndPublished } from "../../access/adminsAndPublished";
 import { ContentBlock } from "../../blocks/ContentBlock";
-import { QuoteBlock } from "../../blocks/QuoteBlock";
+import formatSlug from "../../utilities/formatSlug";
 import { populateAuthors } from "./populateAuthors";
 
-const Posts: CollectionConfig = {
+export const Posts: CollectionConfig = {
   slug: "posts",
   admin: {
     useAsTitle: "title",
@@ -16,7 +16,7 @@ const Posts: CollectionConfig = {
     afterRead: [populateAuthors],
   },
   versions: {
-    drafts: true
+    drafts: true,
   },
   access: {
     read: adminsAndPublished,
@@ -32,6 +32,12 @@ const Posts: CollectionConfig = {
       required: true,
     },
     {
+      name: "media",
+      type: "upload",
+      relationTo: "media",
+      required: true,
+    },
+    {
       name: "categories",
       type: "relationship",
       relationTo: "categories",
@@ -41,34 +47,42 @@ const Posts: CollectionConfig = {
       },
     },
     {
-      name: 'authors',
-      type: 'relationship',
-      relationTo: 'users',
+      name: "authors",
+      type: "relationship",
+      relationTo: "users",
       hasMany: true,
       admin: {
-        position: 'sidebar',
+        position: "sidebar",
       },
     },
     {
-      name: 'populatedAuthors',
-      type: 'array',
+      name: "populatedAuthors",
+      type: "array",
       admin: {
         readOnly: true,
-        disabled: true
+        disabled: true,
       },
       access: {
         update: () => false,
       },
       fields: [
         {
-          name: 'id',
-          type: 'text'
+          name: "id",
+          type: "text",
+          required: true,
         },
         {
-          name: 'name',
-          type: 'text'
-        }
-      ]
+          name: "name",
+          type: "text",
+          required: true,
+        },
+        {
+          name: "photo",
+          type: "upload",
+          relationTo: "media",
+          required: true,
+        },
+      ],
     },
     {
       name: "publishedOn",
@@ -76,16 +90,16 @@ const Posts: CollectionConfig = {
       admin: {
         position: "sidebar",
         date: {
-          pickerAppearance: 'dayAndTime',
+          pickerAppearance: "dayAndTime",
         },
       },
       hooks: {
         beforeChange: [
           ({ siblingData, value }) => {
-            if (siblingData._status === 'published' && !value) {
-              return new Date()
+            if (siblingData._status === "published" && !value) {
+              return new Date();
             }
-            return value
+            return value;
           },
         ],
       },
@@ -94,9 +108,22 @@ const Posts: CollectionConfig = {
       name: "content",
       type: "blocks",
       required: true,
-      blocks: [ContentBlock, QuoteBlock]
-    }
-  ]
-}
+      blocks: [ContentBlock],
+      minRows: 1,
+      maxRows: 10,
+    },
+    {
+      name: "slug",
+      label: "Slug",
+      type: "text",
+      admin: {
+        position: "sidebar",
+      },
+      hooks: {
+        beforeValidate: [formatSlug("title")],
+      },
+    },
+  ],
+};
 
 export default Posts;

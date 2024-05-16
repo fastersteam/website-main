@@ -37,6 +37,7 @@ export interface User {
 export interface Media {
   id: string;
   alt: string;
+  attribution?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -61,47 +62,30 @@ export interface Page {
 export interface Post {
   id: string;
   title: string;
+  media: string | Media;
   categories?: (string | Category)[] | null;
   authors?: (string | User)[] | null;
   populatedAuthors?:
     | {
-        id?: string | null;
-        name?: string | null;
+        id: string | null;
+        name: string;
+        photo: string | Media;
       }[]
     | null;
   publishedOn?: string | null;
-  content: (
-    | {
-        text?:
-          | {
-              [k: string]: unknown;
-            }[]
-          | null;
-        media?:
-          | {
-              media: string | Media;
-              size?: ('auto' | 'halfScreen' | 'fullScreen') | null;
-              position?: ('left' | 'right' | 'center') | null;
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'mediaBlock';
-            }[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'contentBlock';
-      }
-    | {
-        text?:
-          | {
-              [k: string]: unknown;
-            }[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'quoteBlock';
-      }
-  )[];
+  content: {
+    text?:
+      | {
+          [k: string]: unknown;
+        }[]
+      | null;
+    style?: ('standard' | 'quote') | null;
+    media?: string | Media | null;
+    id?: string | null;
+    blockName?: string | null;
+    blockType: 'contentBlock';
+  }[];
+  slug?: string | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
