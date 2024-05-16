@@ -31,9 +31,12 @@ export const Serialize: SerializeFunction = ({ content, customRenderers }) => {
     <Fragment>
       {content?.map((node, i) => {
         if (isText(node)) {
-          // @ts-expect-error
           let text = (
-            <span dangerouslySetInnerHTML={{ __html: escapeHTML(node.text) }} />
+            <span
+              dangerouslySetInnerHTML={{
+                __html: escapeHTML(node.text as string),
+              }}
+            />
           );
 
           if (node.bold) {
